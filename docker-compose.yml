@@ -5,9 +5,9 @@ services:
     hostname: redis
     image: redis:alpine
     restart: always
-    entrypoint: redis-server --appendonly yes --requirepass Admin@123 --maxmemory 512mb --maxmemory-policy allkeys-lru
+    entrypoint: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD} --maxmemory 512mb --maxmemory-policy allkeys-lru
     ports:
-      - '6379:6379'
+      - ${REDIS_PORT}:${REDIS_PORT}
     volumes:
       - redis-data:/data
     networks:
@@ -17,11 +17,11 @@ services:
     container_name: postgres
     restart: always
     environment:
-      - POSTGRES_DB=nestjs_api
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=9!3BoWamok9v
+      - POSTGRES_DB=${DB_DATABASE}
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
     ports:
-      - '5432:5432'
+      - ${DB_PORT}:${DB_PORT}
     volumes:
       - postgres-data:/var/lib/postgresql/data
     networks:
