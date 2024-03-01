@@ -10,31 +10,31 @@ import { RequestIdInterceptor } from './interceptor/request-id.interceptor';
 export const providers: Provider[] = [
   {
     provide: APP_GUARD,
-    useClass: ThrottlerGuard,
+    useClass: ThrottlerGuard
   },
 
   {
     provide: APP_FILTER,
-    useClass: ErrorExceptionFilter,
+    useClass: ErrorExceptionFilter
   },
   {
     provide: APP_FILTER,
-    useClass: HttpExceptionFilter,
+    useClass: HttpExceptionFilter
   },
   {
     provide: APP_FILTER,
-    useClass: BadRequestExceptionFilter,
+    useClass: BadRequestExceptionFilter
   },
   {
     provide: APP_INTERCEPTOR,
-    useClass: QueryInterceptor,
+    useClass: QueryInterceptor
   },
   {
     provide: APP_INTERCEPTOR,
-    useClass: RequestIdInterceptor,
+    useClass: RequestIdInterceptor
   },
   {
     provide: APP_INTERCEPTOR,
-    useClass: LoggingInterceptor,
-  },
+    useClass: LoggingInterceptor
+  }
 ];

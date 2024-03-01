@@ -10,7 +10,7 @@ export function fromSort(
   sort: string,
   defaultSort: string,
   selected?: string[],
-  defaultOrder = 'desc',
+  defaultOrder = 'desc'
 ): { sortBy: string; orderBy: string } {
   const [sortBy = defaultSort, orderBy = defaultOrder] = sort?.split(':') || [];
   if (!!selected && !selected.includes(sortBy)) {
@@ -21,13 +21,13 @@ export function fromSort(
 
 export const fromPaginate = (
   page: number | string | any,
-  size: number | string | any,
+  size: number | string | any
 ): { skip: number; take: number; page: number; size: number } => {
   return {
     skip: (+size || 25) * ((+page || 1) - 1),
     take: +size || 25,
     page: +page || 1,
-    size: +size || 25,
+    size: +size || 25
   };
 };
 
@@ -39,14 +39,14 @@ export const fromOrder = (
     allowFieldSorts?: string[];
     useSnakeCase?: boolean;
     prefixSortBy?: string;
-  },
+  }
 ): { sortBy: string; orderBy: 'ASC' | 'DESC' } => {
   const {
     defaultSort = 'id',
     allowFieldSorts = ['id'],
     defaultOrder = 'ASC',
     useSnakeCase = false,
-    prefixSortBy = '',
+    prefixSortBy = ''
   } = opt;
   const enableSortFields = useSnakeCase ? map(allowFieldSorts, (f) => snakeCase(f)) : allowFieldSorts;
   let [sortBy = defaultSort, orderBy = defaultOrder] = sort?.split(':') || [];

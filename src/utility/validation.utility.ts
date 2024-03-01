@@ -24,7 +24,7 @@ export const factory = (errors) => {
   throw new BadRequestException({
     message: { key: 'bad_request' },
     errors: errs,
-    error: HttpError.BAD_REQUEST,
+    error: HttpError.BAD_REQUEST
   });
 };
 

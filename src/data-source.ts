@@ -12,5 +12,5 @@ export const AppDataSource = new DataSource({
   schema: 'public',
   synchronize: false,
   logging: false,
-  migrations: ['src/migrations/*.ts'],
+  migrations: ['src/migrations/*.ts']
 });

@@ -13,9 +13,9 @@ export const SANITIZE_COMMENT_OPTIONS = {
       'data-username',
       'contenteditable',
       'data-mention-clickable',
-      'style',
-    ],
-  },
+      'style'
+    ]
+  }
 };
 
 const allowedAttributes = {};
@@ -23,5 +23,5 @@ forEach(sanitize.defaults.allowedTags, (t) => {
   allowedAttributes[t] = ['class', 'style'];
 });
 export const SANITIZE_JA_OPTIONS: sanitize.IOptions = {
-  allowedAttributes,
+  allowedAttributes
 };

@@ -13,7 +13,7 @@ export const BETWEEN = {
   ARRAY: 'validations.between.array',
   FILE: 'validations.between.file',
   NUMERIC: 'validations.between.numeric',
-  STRING: 'validations.between.string',
+  STRING: 'validations.between.string'
 };
 export const BOOLEAN = 'validations.boolean';
 export const CONFIRMED = 'validations.confirmed';
@@ -35,13 +35,13 @@ export const GT = {
   ARRAY: 'validations.gt.array',
   FILE: 'validations.gt.file',
   NUMERIC: 'validations.gt.numeric',
-  STRING: 'validations.gt.string',
+  STRING: 'validations.gt.string'
 };
 export const GTE = {
   ARRAY: 'validations.gte.array',
   FILE: 'validations.gte.file',
   NUMERIC: 'validations.gte.numeric',
-  STRING: 'validations.gte.string',
+  STRING: 'validations.gte.string'
 };
 export const IMAGE = 'validations.image';
 export const IN = 'validations.in';
@@ -55,26 +55,26 @@ export const LT = {
   ARRAY: 'validations.lt.array',
   FILE: 'validations.lt.file',
   NUMERIC: 'validations.lt.numeric',
-  STRING: 'validations.lt.string',
+  STRING: 'validations.lt.string'
 };
 export const LTE = {
   ARRAY: 'validations.lte.array',
   FILE: 'validations.lte.file',
   NUMERIC: 'validations.lte.numeric',
-  STRING: 'validations.lte.string',
+  STRING: 'validations.lte.string'
 };
 export const MAX = {
   ARRAY: 'validations.max.array',
   FILE: 'validations.max.file',
   NUMERIC: 'validations.max.numeric',
-  STRING: 'validations.max.string',
+  STRING: 'validations.max.string'
 };
 export const MIME_TYPES = 'validations.mimetypes';
 export const MIN = {
   ARRAY: 'validations.min.array',
   FILE: 'validations.min.file',
   NUMERIC: 'validations.min.numeric',
-  STRING: 'validations.min.string',
+  STRING: 'validations.min.string'
 };
 export const MULTIPLE_OF = 'validations.multiple_of';
 export const NOT_EMPTY = 'validations.not_empty';
@@ -100,7 +100,7 @@ export const SIZE = {
   ARRAY: 'validations.size.array',
   FILE: 'validations.size.file',
   NUMERIC: 'validations.size.numeric',
-  STRING: 'validations.size.string',
+  STRING: 'validations.size.string'
 };
 export const STARTS_WITH = 'validations.starts_with';
 export const STRING = 'validations.string';

@@ -26,7 +26,7 @@ export class BadRequestExceptionFilter implements ExceptionFilter<BadRequestExce
         try {
           constraints[constraint] = this.i18n.translate(error?.key, {
             args: error.args,
-            lang,
+            lang
           });
         } catch (err) {
           constraints[constraint] = error;
@@ -42,13 +42,13 @@ export class BadRequestExceptionFilter implements ExceptionFilter<BadRequestExce
 
     if (typeof errors === 'string') {
       message = {
-        key: errors,
+        key: errors
       };
     }
 
     if (typeof errors?.message === 'string') {
       message = {
-        key: errors.message,
+        key: errors.message
       };
     }
 
@@ -58,7 +58,7 @@ export class BadRequestExceptionFilter implements ExceptionFilter<BadRequestExce
       }
       message = await this.i18n.translate(message.key, {
         lang: ctx.getRequest().i18nLang,
-        args: message,
+        args: message
       });
     } catch (error) {}
 
@@ -67,7 +67,7 @@ export class BadRequestExceptionFilter implements ExceptionFilter<BadRequestExce
       ...(errors || {}),
       message,
       timestamp: new Date().toISOString(),
-      path: request.url,
+      path: request.url
     };
 
     if (isNotEmptyObject(errs)) {

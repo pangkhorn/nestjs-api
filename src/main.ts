@@ -21,14 +21,14 @@ async function bootstrap() {
       'http://localhost:8082',
       'https://dev-hrms.ababank.com:9004',
       'https://uat-hrms.ababank.com:9004',
-      'https://recruitment-connect-uat.ababank.com',
+      'https://recruitment-connect-uat.ababank.com'
     );
   }
   app.enableCors({
     credentials: true,
     origin: origins,
     methods: ['GET', 'POST', 'HEAD', 'PUT', 'PATCH'],
-    preflightContinue: false,
+    preflightContinue: false
   });
 
   app.use(MethodOverride('X-HTTP-Method-Override'));
@@ -36,7 +36,7 @@ async function bootstrap() {
 
   app.enableVersioning({
     type: VersioningType.URI,
-    defaultVersion: '1',
+    defaultVersion: '1'
   });
 
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true, exceptionFactory: factory }));

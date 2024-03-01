@@ -1,4 +1,4 @@
-import { User } from '@infrastructures/io/entity';
+import { Transactions, Users, WalletHolders, Wallets } from '@infrastructures/io/entity';
 import { registerAs } from '@nestjs/config';
 import { DataSourceOptions } from 'typeorm';
 
@@ -16,8 +16,8 @@ export default (_entities: string) =>
       useUTC: true,
       entities: [_entities],
       synchronize: false,
-      logging: false,
-    }),
+      logging: false
+    })
   );
 
-export const Entities = [User];
+export const Entities = [Users, Wallets, WalletHolders, Transactions];

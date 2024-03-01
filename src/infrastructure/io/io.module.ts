@@ -8,16 +8,16 @@ import { providersIO } from './provider.io';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      load: [databaseConfig(__dirname + '/**/*.entity{.ts,.js}')],
+      load: [databaseConfig(__dirname + '/**/*.entity{.ts,.js}')]
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (config: ConfigService) => config.get('database'),
-      inject: [ConfigService],
+      inject: [ConfigService]
     }),
-    TypeOrmModule.forFeature(Entities),
+    TypeOrmModule.forFeature(Entities)
   ],
   providers: providersIO,
-  exports: exportsIO,
+  exports: exportsIO
 })
 export class IOModule {}

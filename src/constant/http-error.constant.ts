@@ -8,7 +8,7 @@ export enum HttpError {
   METHOD_NOT_ALLOWED = 'Method Not Allowed',
   NOT_ACCEPTABLE = 'Not Acceptance',
   TOO_MANY_REQUESTS = 'Too Many Requests',
-  INTERNAL_SERVER = 'Internal Server Error',
+  INTERNAL_SERVER = 'Internal Server Error'
 }
 
 export const statusToError = (status: number) => {

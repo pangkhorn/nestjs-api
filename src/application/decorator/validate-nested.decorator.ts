@@ -38,7 +38,7 @@ export function ValidateNested(schema: new () => any, validationOptions?: Valida
               shouldValidateError(schema, element) &&
                 errors.push({
                   idx: args.value.indexOf(element),
-                  errors: validateSync(plainToInstance(schema, element)),
+                  errors: validateSync(plainToInstance(schema, element))
                 });
             });
             if (errors.length) {
@@ -46,7 +46,7 @@ export function ValidateNested(schema: new () => any, validationOptions?: Valida
               errors.forEach((e) =>
                 e.errors.forEach((ev) => {
                   errorString += `${args.property}[${e.idx}].${ev.property}: ${Object.values(ev.constraints)}, `;
-                }),
+                })
               );
               return errorString;
             }
@@ -57,8 +57,8 @@ export function ValidateNested(schema: new () => any, validationOptions?: Valida
               .map((e) => e.constraints)
               .reduce((acc, next) => acc.concat(Object.values(next)), [])
           ).toString();
-        },
-      },
+        }
+      }
     });
   };
 }

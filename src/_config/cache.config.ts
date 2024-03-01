@@ -8,5 +8,5 @@ export default (config: string, ttl = parseInt(process.env.REDIS_TTL || '0')) =>
     isGlobal: true,
     host: process.env.REDIS_HOST || 'localhost',
     port: parseInt(process.env.REDIS_PORT || '6379'),
-    password: process.env.REDIS_PASSWORD || 'secret',
+    password: process.env.REDIS_PASSWORD || 'secret'
   }));

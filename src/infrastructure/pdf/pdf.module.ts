@@ -6,14 +6,14 @@ import { PDFService } from './pdf.service';
   providers: [
     {
       provide: PDF_SERVICE,
-      useClass: PDFService,
-    },
+      useClass: PDFService
+    }
   ],
   exports: [
     {
       provide: PDF_SERVICE,
-      useClass: PDFService,
-    },
-  ],
+      useClass: PDFService
+    }
+  ]
 })
 export class PDFModule {}

@@ -12,12 +12,12 @@ export class CachingModule {
         CacheModule.registerAsync({
           imports: options.imports,
           useFactory: options.useFactory,
-          inject: [ConfigService],
-        }),
+          inject: [ConfigService]
+        })
       ],
       providers: [],
       exports: [],
-      module: CachingModule,
+      module: CachingModule
     };
   }
 }

@@ -30,8 +30,8 @@ export class LoggingInterceptor implements NestInterceptor {
         complete: () => {
           const msg = `${request.method} ${request.path} ${response.statusCode} - ${Date.now() - now}ms`;
           this.logger.log(msg);
-        },
-      }),
+        }
+      })
     );
   }
 }

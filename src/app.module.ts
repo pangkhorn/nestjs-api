@@ -6,12 +6,12 @@ import { HealthModule } from './application/health.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      isGlobal: true,
+      isGlobal: true
     }),
     ApplicationModule,
-    HealthModule,
+    HealthModule
   ],
   controllers: [],
-  providers: [],
+  providers: []
 })
 export class AppModule {}

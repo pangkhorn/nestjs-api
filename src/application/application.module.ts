@@ -16,22 +16,22 @@ import { providers } from './provider.application';
       useFactory: (config: ConfigService) => [
         {
           ttl: parseInt(config.get('RATE_LIMIT_TTL', '60')) * 1000,
-          limit: parseInt(config.get('RATE_LIMIT_TTL', '60')),
-        },
-      ],
+          limit: parseInt(config.get('RATE_LIMIT_TTL', '60'))
+        }
+      ]
     }),
     EventEmitterModule.forRoot(),
     I18nModule.forRoot({
       fallbackLanguage: 'en',
       loaderOptions: {
         path: path.join(__dirname, '../i18n/'),
-        watch: true,
+        watch: true
       },
-      resolvers: [{ use: QueryResolver, options: ['lang'] }, AcceptLanguageResolver],
+      resolvers: [{ use: QueryResolver, options: ['lang'] }, AcceptLanguageResolver]
     }),
-    DomainModule,
+    DomainModule
   ],
   controllers: controllers,
-  providers: providers,
+  providers: providers
 })
 export class ApplicationModule {}

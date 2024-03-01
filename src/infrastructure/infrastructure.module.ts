@@ -12,9 +12,9 @@ import { PDFModule } from './pdf/pdf.module';
     CachingModule.config({
       imports: [ConfigModule.forFeature(cacheConfig('cache'))],
       useFactory: (config: ConfigService) => config.get('cache'),
-      inject: [ConfigService],
-    }),
+      inject: [ConfigService]
+    })
   ],
-  exports: [IOModule, CachingModule, PDFModule],
+  exports: [IOModule, CachingModule, PDFModule]
 })
 export class InfrastructureModule {}

@@ -15,9 +15,9 @@ export class PDFService implements IPDFService {
         left: '14px',
         top: '14px',
         right: '14px',
-        bottom: '14px',
+        bottom: '14px'
       },
-      ...options,
+      ...options
     });
     await browser.close();
     return buffer;

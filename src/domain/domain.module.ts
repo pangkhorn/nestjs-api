@@ -6,6 +6,6 @@ import { providersDomain } from './provider.domain';
 @Module({
   imports: [InfrastructureModule],
   providers: providersDomain,
-  exports: exportsDomain,
+  exports: exportsDomain
 })
 export class DomainModule {}

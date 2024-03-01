@@ -1,9 +1,14 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, Generated, PrimaryGeneratedColumn } from 'typeorm';
+import { Timestamps } from './timestamps.entity';
 
-@Entity()
-export class User {
+@Entity({ name: 'users' })
+export class Users extends Timestamps {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @Generated('uuid')
+  @Column({ name: 'uuid' })
+  uuid: string;
 
   @Column({ nullable: true, length: 255 })
   username: string;
@@ -19,10 +24,4 @@ export class User {
 
   @Column({ name: 'last_name', nullable: true, length: 255 })
   lastName?: string;
-
-  @Column({ default: () => 'NOW()' })
-  createdAt: Date;
-
-  @Column({ default: () => 'NOW()', onUpdate: 'NOW()' })
-  updatedAt: Date;
 }

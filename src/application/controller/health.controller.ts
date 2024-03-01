@@ -7,7 +7,7 @@ export class HealthController {
   constructor(
     private readonly health: HealthCheckService,
     private readonly db: TypeOrmHealthIndicator,
-    private readonly microservice: MicroserviceHealthIndicator,
+    private readonly microservice: MicroserviceHealthIndicator
   ) {}
 
   @Get()
@@ -21,9 +21,9 @@ export class HealthController {
           options: {
             host: process.env.REDIS_HOST || 'localhost',
             port: parseInt(process.env.REDIS_PORT || '6379'),
-            password: process.env.REDIS_PASSWORD || '',
-          },
-        }),
+            password: process.env.REDIS_PASSWORD || ''
+          }
+        })
     ]);
   }
 }

@@ -20,20 +20,20 @@ export class HttpExceptionFilter implements ExceptionFilter {
 
     if (typeof res === 'string') {
       message = {
-        key: res,
+        key: res
       };
     }
 
     if (typeof res?.message === 'string') {
       message = {
-        key: res.message,
+        key: res.message
       };
     }
 
     try {
       message = await this.i18n.translate(message.key, {
         lang: ctx.getRequest().i18nLang,
-        args: message.args,
+        args: message.args
       });
     } catch (error) {}
 
@@ -45,7 +45,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
         error: statusToError(exception.getStatus()),
         message: message,
         timestamp: new Date().toISOString(),
-        path: request.url,
+        path: request.url
       });
     }
   }
