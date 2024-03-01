@@ -1,0 +1,8 @@
+{
+    "bad_request": "Bad Request.",
+    "not_found": "Not Found.",
+    "forbidden": "Forbidden resource or Resource not found.",
+    "no_change": "Your request to update has nothing change.",
+    "not_to_submit": "There is nothing to submit.",
+    "unauthenticated": "Unauthenticated"
+}

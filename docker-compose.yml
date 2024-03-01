@@ -1,0 +1,34 @@
+version: '3.9'
+services:
+  redis:
+    container_name: redis_container
+    hostname: redis
+    image: redis:alpine
+    restart: always
+    entrypoint: redis-server --appendonly yes --requirepass Admin@123 --maxmemory 512mb --maxmemory-policy allkeys-lru
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis-data:/data
+    networks:
+      - docker-network
+  postgres:
+    image: postgres:14.1-alpine
+    container_name: postgres
+    restart: always
+    environment:
+      - POSTGRES_DB=nestjs_api
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=9!3BoWamok9v
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - docker-network
+volumes:
+  redis-data:
+  postgres-data:
+networks:
+  docker-network:
+    driver: bridge
