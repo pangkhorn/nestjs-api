@@ -1,6 +1,12 @@
 import { IWalletRepository } from '@adaptors/repository';
-import { Injectable } from '@nestjs/common';
-import { ICreateWalletServiceCommand, IListWalletRepoResponse, IWalletServiceQuery } from '@shares/wallet.interface';
+import { X } from '@constants/index';
+import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  ICreateWalletServiceCommand,
+  IListWalletRepoResponse,
+  IListWalletServiceQuery,
+  IUpdateWalletRepoCommand
+} from '@shares/wallet.interface';
 import { fromOrder, fromPaginate } from '@utilities/paginate.utility';
 import { DataSource, ILike, Repository } from 'typeorm';
 import { Wallets } from '../entity';
@@ -10,7 +16,24 @@ export class WalletRepository extends Repository<Wallets> implements IWalletRepo
   constructor(private readonly dataSource: DataSource) {
     super(Wallets, dataSource.createEntityManager());
   }
-  async listWallets(query: IWalletServiceQuery): Promise<IListWalletRepoResponse> {
+  getDetailWallet(params: { uuid: string }): Promise<Wallets> {
+    return this.findOne({ where: { uuid: params.uuid } });
+  }
+  async updateWallet(walletData: IUpdateWalletRepoCommand): Promise<Wallets> {
+    const { name, description, uuid } = walletData;
+    const wallet = await this.findOne({ where: { uuid } });
+    if (!wallet) {
+      throw new BadRequestException(X.WALLETS.NOT_FOUND);
+    }
+    if (name) {
+      wallet.name = name;
+    }
+    if (description || description === '') {
+      wallet.description = description;
+    }
+    return this.save(wallet);
+  }
+  async listWallets(query: IListWalletServiceQuery): Promise<IListWalletRepoResponse> {
     const { orderBy, sortBy } = fromOrder(query.sort, {
       defaultOrder: 'DESC',
       defaultSort: 'createdAt',

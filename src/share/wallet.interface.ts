@@ -8,15 +8,23 @@ export interface ICreateWalletServiceCommand {
   balance?: number;
 }
 
-export interface IWalletServiceQuery {
+export interface IListWalletServiceQuery {
   page?: number;
   size?: number;
   sort: string;
   keyword?: string;
 }
 
+export interface IUpdateWalletServiceCommand {
+  uuid: string;
+  name?: string;
+  description?: string;
+}
+
+export type IUpdateWalletRepoCommand = IUpdateWalletServiceCommand;
+
 export type ICreateWalletRepoCommand = ICreateWalletServiceCommand;
-export type IWalletRepoQuery = IWalletServiceQuery;
+export type IListWalletRepoQuery = IListWalletServiceQuery;
 
 export interface IListWalletServiceResponse {
   wallets: Wallets[];

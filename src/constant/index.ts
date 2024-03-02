@@ -15,3 +15,5 @@ export * as V from './key-validations.constant';
  * @description all the constant for redis event
  */
 export * from './common.constant';
+
+export * as X from './key-exceptions.constant';
