@@ -19,10 +19,11 @@ export function fromSort(
   return { sortBy, orderBy: orderBy?.toLowerCase() === 'asc' ? 'ASC' : 'DESC' };
 }
 
-export const fromPaginate = (
-  page: number | string | any,
-  size: number | string | any
-): { skip: number; take: number; page: number; size: number } => {
+export const fromPaginate = (params: {
+  page: number | string | any;
+  size: number | string | any;
+}): { skip: number; take: number; page: number; size: number } => {
+  const { page, size } = params;
   return {
     skip: (+size || 25) * ((+page || 1) - 1),
     take: +size || 25,

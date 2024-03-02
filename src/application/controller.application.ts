@@ -1,2 +1,2 @@
-import { UserController } from './controller';
-export const controllers = [UserController];
+import { UserController, WalletController } from './controller';
+export const controllers = [UserController, WalletController];

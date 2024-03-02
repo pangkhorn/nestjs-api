@@ -1,6 +1,6 @@
 import { HttpError } from '@constants/http-error.constant';
 import { BadRequestException } from '@nestjs/common';
-import { arrayNotEmpty, isArray, isObject } from 'class-validator';
+import { ValidationArguments, arrayNotEmpty, isArray, isObject } from 'class-validator';
 
 export const factory = (errors) => {
   const errs = {};
@@ -39,3 +39,7 @@ function mapMsgs(constraints: any): any {
   }
   return msgs;
 }
+
+export const concatVKey = (arg: ValidationArguments, key: string) => {
+  return `${arg.property}.${key}`;
+};

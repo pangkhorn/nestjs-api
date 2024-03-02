@@ -1,3 +1,4 @@
+import { CurrencyEnum } from '@constants/enum';
 import { Column, Entity, Generated, PrimaryGeneratedColumn } from 'typeorm';
 import { Timestamps } from './timestamps.entity';
 
@@ -17,7 +18,7 @@ export class Wallets extends Timestamps {
   description: string;
 
   @Column({ nullable: true })
-  currency: string;
+  currency: CurrencyEnum;
 
   @Column({ default: 0 })
   balance: number;

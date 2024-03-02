@@ -9,3 +9,8 @@ export enum TransactionTypeEnum {
   DEPOSIT = 'deposit',
   WITHDRaW = 'withdraw'
 }
+
+export enum CurrencyEnum {
+  USD = 'usd',
+  KHR = 'khr'
+}
