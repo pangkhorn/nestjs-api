@@ -41,7 +41,9 @@
       "@configs/*": ["src/_config/*"],
       "@configs": ["src/_config"],
       "@shares/*": ["src/share/*"],
-      "@shares": ["src/share"]
+      "@shares": ["src/share"],
+      "@seeds/*": ["src/seed/*"],
+      "@seeds": ["src/seed"]
     }
   }
 }

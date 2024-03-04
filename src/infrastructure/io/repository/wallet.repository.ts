@@ -8,8 +8,8 @@ import {
   IUpdateWalletRepoCommand
 } from '@shares/wallet.interface';
 import { fromOrder, fromPaginate } from '@utilities/paginate.utility';
-import { DataSource, ILike, Repository } from 'typeorm';
-import { Wallets } from '../entity';
+import { DataSource, FindOptionsWhere, ILike, Repository } from 'typeorm';
+import { Users, WalletHolders, Wallets } from '../entity';
 
 @Injectable()
 export class WalletRepository extends Repository<Wallets> implements IWalletRepository {
@@ -42,8 +42,9 @@ export class WalletRepository extends Repository<Wallets> implements IWalletRepo
     const { skip, take, page, size } = fromPaginate({ page: query.page, size: query.size });
 
     const filterName = query.keyword ? { name: ILike(`%${query.keyword}%`) } : {};
+    const filterUser: FindOptionsWhere<Wallets> = query.user ? { holders: { user: { uuid: query.user } } } : {};
     const [wallets, total] = await this.findAndCount({
-      where: { ...filterName },
+      where: { ...filterName, ...filterUser },
       take,
       skip,
       order: { [sortBy]: orderBy }
@@ -56,11 +57,20 @@ export class WalletRepository extends Repository<Wallets> implements IWalletRepo
     };
   }
   async createWallet(walletData: ICreateWalletServiceCommand): Promise<Wallets> {
-    const wallet = new Wallets();
-    wallet.name = walletData.name;
-    wallet.description = walletData.description;
-    wallet.currency = walletData.currency;
-    wallet.balance = walletData.balance;
-    return this.save(wallet);
+    const user = await this.manager.findOne(Users, { where: { uuid: walletData.userUuid } });
+    if (!user) {
+      throw new BadRequestException(X.USERS.NOT_FOUND);
+    }
+
+    return this.manager.transaction(async (trx) => {
+      let wallet = new Wallets();
+      wallet.name = walletData.name;
+      wallet.description = walletData.description;
+      wallet.currency = walletData.currency;
+      wallet.balance = walletData.balance;
+      wallet = await trx.save(wallet);
+      await trx.save(WalletHolders, { isOwner: true, userId: user.id, walletId: wallet.id });
+      return wallet;
+    });
   }
 }

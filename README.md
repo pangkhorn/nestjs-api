@@ -15,6 +15,9 @@ $ npm install
 
 # Migrations
 $ npm run migration:run
+
+# Optional seed users
+$ npm run seed:users -n=10  # To create 10 dummy users
 ```
 
 ```bash

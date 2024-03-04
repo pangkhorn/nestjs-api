@@ -30,6 +30,8 @@
     "@middlewares/(.*)": ["<rootDir>/src/middleware/$1"],
     "@middlewares": ["<rootDir>/src/middleware"],
     "@shares/(.*)": ["<rootDir>/src/share/$1"],
-    "@shares": ["<rootDir>/src/share"]
+    "@shares": ["<rootDir>/src/share"],
+    "@seeds/(.*)": ["<rootDir>/src/seed/$1"],
+    "@seeds": ["<rootDir>/src/seed"]
   }
 }

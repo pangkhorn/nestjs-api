@@ -1,5 +1,7 @@
+import { IListUserServiceQuery, IListUserServiceResponse } from '@shares/user.interface';
+
 export const USER_SERVICE = 'USER_SERVICE';
 
 export interface IUserService {
-  getListUsers(query: any): Promise<any[]>;
+  getListUsers(query: IListUserServiceQuery): Promise<IListUserServiceResponse>;
 }

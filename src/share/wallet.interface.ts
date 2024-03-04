@@ -2,6 +2,7 @@ import { CurrencyEnum } from '@constants/enum';
 import { Wallets } from '@infrastructures/io/entity';
 
 export interface ICreateWalletServiceCommand {
+  userUuid: string;
   name: string;
   description?: string;
   currency: CurrencyEnum;
@@ -9,9 +10,10 @@ export interface ICreateWalletServiceCommand {
 }
 
 export interface IListWalletServiceQuery {
+  user?: string;
   page?: number;
   size?: number;
-  sort: string;
+  sort?: string;
   keyword?: string;
 }
 

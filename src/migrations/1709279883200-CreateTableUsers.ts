@@ -14,6 +14,7 @@ export class CreateTableUsers1709279883200 implements MigrationInterface {
           { name: 'email', type: 'varchar', isNullable: true },
           { name: 'first_name', type: 'varchar', isNullable: true },
           { name: 'last_name', type: 'varchar', default: null, isNullable: true },
+          { name: 'password', type: 'varchar', isNullable: true },
           ...timestamps
         ]
       })
