@@ -2,7 +2,8 @@ import { IWalletRepository } from '@adaptors/repository';
 import { X } from '@constants/index';
 import { BadRequestException, Injectable } from '@nestjs/common';
 import {
-  ICreateWalletServiceCommand,
+  IAddWalletHolderRepo,
+  ICreateWalletService,
   IListWalletRepoResponse,
   IListWalletServiceQuery,
   IUpdateWalletRepoCommand
@@ -15,6 +16,22 @@ import { Users, WalletHolders, Wallets } from '../entity';
 export class WalletRepository extends Repository<Wallets> implements IWalletRepository {
   constructor(private readonly dataSource: DataSource) {
     super(Wallets, dataSource.createEntityManager());
+  }
+  async addWalletHolder(data: IAddWalletHolderRepo): Promise<Wallets> {
+    const { userUuid, walletUuid } = data;
+    const [wallet, user] = await Promise.all([
+      this.findOne({ where: { uuid: walletUuid } }),
+      this.manager.findOne(Users, { where: { uuid: userUuid } })
+    ]);
+
+    if (!user) {
+      throw new BadRequestException(X.USERS.NOT_FOUND);
+    }
+    if (!wallet) {
+      throw new BadRequestException(X.WALLETS.NOT_FOUND);
+    }
+    await this.manager.save(WalletHolders, { userId: user.id, walletId: wallet.id });
+    return wallet;
   }
   getDetailWallet(params: { uuid: string }): Promise<Wallets> {
     return this.findOne({ where: { uuid: params.uuid } });
@@ -56,7 +73,7 @@ export class WalletRepository extends Repository<Wallets> implements IWalletRepo
       total
     };
   }
-  async createWallet(walletData: ICreateWalletServiceCommand): Promise<Wallets> {
+  async createWallet(walletData: ICreateWalletService): Promise<Wallets> {
     const user = await this.manager.findOne(Users, { where: { uuid: walletData.userUuid } });
     if (!user) {
       throw new BadRequestException(X.USERS.NOT_FOUND);

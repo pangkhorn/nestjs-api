@@ -1,8 +1,10 @@
 import { Controller, Get } from '@nestjs/common';
 import { RedisOptions, Transport } from '@nestjs/microservices';
+import { ApiTags } from '@nestjs/swagger';
 import { HealthCheck, HealthCheckService, MicroserviceHealthIndicator, TypeOrmHealthIndicator } from '@nestjs/terminus';
 
-@Controller({ path: 'health', version: '1' })
+@ApiTags('Health Check')
+@Controller({ path: 'health' })
 export class HealthController {
   constructor(
     private readonly health: HealthCheckService,

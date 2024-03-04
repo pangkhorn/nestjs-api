@@ -1,9 +1,12 @@
 import { ParseUUIDV4Pipe } from '@commons/pipe.common';
 import { IWalletService, WALLET_SERVICE } from '@domains/service';
-import { CreatedWalletDto, ListWalletDto, UpdateWalletDto } from '@dtos/wallet.dto';
-import { Body, Controller, Get, Inject, Param, Post, Put, Query } from '@nestjs/common';
+import { AddWalletHolder, CreatedWalletDto, ListWalletDto, UpdateWalletDto } from '@dtos/wallet.dto';
+import { Body, Controller, Get, HttpCode, Inject, Param, Post, Put, Query } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
+import { HttpStatusCode } from 'axios';
 
-@Controller({ path: 'wallets', version: '1' })
+@ApiTags('Wallets')
+@Controller({ path: 'wallets' })
 export class WalletController {
   constructor(@Inject(WALLET_SERVICE) private readonly walletService: IWalletService) {}
 
@@ -32,8 +35,20 @@ export class WalletController {
   }
 
   @Post()
+  @HttpCode(HttpStatusCode.Created)
+  // @ApiCreatedResponse({ status: HttpStatusCode.Created })
   async createWallet(@Body() createWallet: CreatedWalletDto) {
     const wallet = await this.walletService.createWallet(createWallet);
+    return { wallets: { wallet } };
+  }
+
+  @Post(':uuid/add-holder')
+  async addHolder(
+    @Param('uuid', new ParseUUIDV4Pipe())
+    uuid: string,
+    @Body() dto: AddWalletHolder
+  ) {
+    const wallet = await this.walletService.addWalletHolder({ userUuid: dto.userUuid, walletUuid: uuid });
     return { wallets: { wallet } };
   }
 }

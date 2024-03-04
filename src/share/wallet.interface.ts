@@ -1,7 +1,7 @@
 import { CurrencyEnum } from '@constants/enum';
 import { Wallets } from '@infrastructures/io/entity';
 
-export interface ICreateWalletServiceCommand {
+export interface ICreateWalletService {
   userUuid: string;
   name: string;
   description?: string;
@@ -17,15 +17,15 @@ export interface IListWalletServiceQuery {
   keyword?: string;
 }
 
-export interface IUpdateWalletServiceCommand {
+export interface IUpdateWalletService {
   uuid: string;
   name?: string;
   description?: string;
 }
 
-export type IUpdateWalletRepoCommand = IUpdateWalletServiceCommand;
+export type IUpdateWalletRepoCommand = IUpdateWalletService;
 
-export type ICreateWalletRepoCommand = ICreateWalletServiceCommand;
+export type ICreateWalletRepoCommand = ICreateWalletService;
 export type IListWalletRepoQuery = IListWalletServiceQuery;
 
 export interface IListWalletServiceResponse {
@@ -36,3 +36,10 @@ export interface IListWalletServiceResponse {
 }
 
 export type IListWalletRepoResponse = IListWalletServiceResponse;
+
+export interface IAddWalletHolderService {
+  walletUuid: string;
+  userUuid: string;
+}
+
+export interface IAddWalletHolderRepo extends IAddWalletHolderService {}

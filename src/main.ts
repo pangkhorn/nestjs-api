@@ -1,4 +1,4 @@
-import { Logger, ValidationPipe, VersioningType } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { useContainer } from 'class-validator';
@@ -11,29 +11,11 @@ import { factory } from './utility';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
-  // app.useStaticAssets(join(__dirname, '..', 'public'));
   app.use(helmet());
   setupSwagger(app);
-  // const origins = ['*'];
-  // if (process.env.NODE_ENV !== 'production') {
-  //   origins.push(
-  //     'http://localhost',
-  //   );
-  // }
-  // app.enableCors({
-  //   credentials: true,
-  //   origin: origins,
-  //   methods: ['GET', 'POST', 'HEAD', 'PUT', 'PATCH'],
-  //   preflightContinue: false
-  // });
 
   app.use(MethodOverride('X-HTTP-Method-Override'));
   app.use(compression());
-
-  app.enableVersioning({
-    type: VersioningType.URI,
-    defaultVersion: '1'
-  });
 
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true, exceptionFactory: factory }));
 

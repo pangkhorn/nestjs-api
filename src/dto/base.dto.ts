@@ -1,8 +1,10 @@
 import { V } from '@constants/index';
 import * as regex from '@constants/regex.constant';
+import { ApiPropertyOptional } from '@nestjs/swagger';
 import { IsOptional, IsString, Matches } from 'class-validator';
 
 export class PaginationDto {
+  @ApiPropertyOptional()
   @IsOptional()
   size = 25;
 

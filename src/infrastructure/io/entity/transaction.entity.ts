@@ -36,6 +36,6 @@ export class Transactions extends Timestamps {
   wallet: Wallets;
 
   @ManyToOne(() => Users, () => Users)
-  @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
+  @JoinColumn({ name: 'created_by', referencedColumnName: 'id' })
   creator: Users;
 }
