@@ -1,5 +1,6 @@
 import { CurrencyEnum } from '@constants/enum';
 import { Wallets } from '@infrastructures/io/entity';
+import { IPagination } from './base.interface';
 
 export interface ICreateWalletService {
   userUuid: string;
@@ -9,12 +10,8 @@ export interface ICreateWalletService {
   balance?: number;
 }
 
-export interface IListWalletServiceQuery {
+export interface IListWalletServiceQuery extends IPagination {
   user?: string;
-  page?: number;
-  size?: number;
-  sort?: string;
-  keyword?: string;
 }
 
 export interface IUpdateWalletService {

@@ -28,25 +28,17 @@ export class UserSeed extends CommandRunner {
     }
 
     const users: Users[] = [];
-    times(numOfUsers, (n) => {
+    times(numOfUsers, () => {
       const firstName = faker.person.firstName();
       const lastName = faker.person.lastName();
-      let username = 'admin';
-      let password = 'admin123';
-      let email = 'admin@gmail.com';
-      if (n !== 0) {
-        password = faker.internet.password();
-        username = faker.internet.userName({ firstName, lastName });
-        email = faker.internet.email({ firstName, lastName, provider: 'gmail.com' });
-      }
       users.push({
         id: undefined,
         uuid: randomUUID(),
         firstName,
         lastName,
-        username,
-        email,
-        password: bcrypt.hashSync(password, 10)
+        username: faker.internet.userName({ firstName, lastName }),
+        email: faker.internet.email({ firstName, lastName, provider: 'gmail.com' }),
+        password: bcrypt.hashSync('admin123', 10)
       });
     });
 

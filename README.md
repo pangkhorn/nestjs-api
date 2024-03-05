@@ -36,7 +36,7 @@ $ npm run start:prod
 
 ## Demo
 
-Demo url(http://localhost:3333/v1/health)
+Demo url(http://localhost:3333/health)
 
 ```bash
 ## Create new file migration

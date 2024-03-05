@@ -9,6 +9,7 @@
     "not_found": "The wallet not found."
   },
   "users": {
-    "not_found": "The user not found."
+    "not_found": "The user not found.",
+    "existing": "The user is already exist."
   }
 }

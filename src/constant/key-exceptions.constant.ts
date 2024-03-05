@@ -10,5 +10,6 @@ export const WALLETS = {
 };
 
 export const USERS = {
-  NOT_FOUND: 'exceptions.users.not_found'
+  NOT_FOUND: 'exceptions.users.not_found',
+  EXISTING: 'exceptions.users.existing'
 };

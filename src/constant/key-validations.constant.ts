@@ -81,6 +81,7 @@ export const NOT_EMPTY = 'validations.not_empty';
 export const NOT_IN = 'validations.not_in';
 export const NOT_REGEX = 'validations.not_regex';
 export const NUMERIC = 'validations.numeric';
+export const POSITIVE = 'validations.positive';
 export const PASSWORD = 'validations.password';
 export const PRESENT = 'validations.present';
 export const PROHIBITED = 'validations.prohibited';

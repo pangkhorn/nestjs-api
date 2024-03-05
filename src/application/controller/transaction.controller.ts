@@ -1,6 +1,6 @@
 import { ITransactionService, TRANSACTION_SERVICE } from '@domains/service';
-import { CreatedTransactionDto } from '@dtos/transaction.dto';
-import { Body, Controller, HttpCode, Inject, Post } from '@nestjs/common';
+import { CreatedTransactionDto, ListTransactionDto } from '@dtos/transaction.dto';
+import { Body, Controller, Get, HttpCode, Inject, Post, Query } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { HttpStatusCode } from 'axios';
 
@@ -9,10 +9,10 @@ import { HttpStatusCode } from 'axios';
 export class TransactionController {
   constructor(@Inject(TRANSACTION_SERVICE) private readonly transactionService: ITransactionService) {}
 
-  // @Get()
-  // async listTransactions(@Query() query: ListTransactionDto) {
-  //   return { transactions: await this.transactionService.listTransactions(query) };
-  // }
+  @Get()
+  async listTransactions(@Query() query: ListTransactionDto) {
+    return { transactions: await this.transactionService.listTransactions(query) };
+  }
 
   // @Get(':uuid')
   // async getTransaction(

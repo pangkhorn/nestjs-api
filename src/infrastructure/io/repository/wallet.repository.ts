@@ -9,6 +9,7 @@ import {
   IUpdateWalletRepoCommand
 } from '@shares/wallet.interface';
 import { fromOrder, fromPaginate } from '@utilities/paginate.utility';
+import { every, map } from 'lodash';
 import { DataSource, FindOptionsWhere, ILike, Repository } from 'typeorm';
 import { Users, WalletHolders, Wallets } from '../entity';
 
@@ -19,9 +20,10 @@ export class WalletRepository extends Repository<Wallets> implements IWalletRepo
   }
   async addWalletHolder(data: IAddWalletHolderRepo): Promise<Wallets> {
     const { userUuid, walletUuid } = data;
-    const [wallet, user] = await Promise.all([
+    const [wallet, user, existing] = await Promise.all([
       this.findOne({ where: { uuid: walletUuid } }),
-      this.manager.findOne(Users, { where: { uuid: userUuid } })
+      this.manager.findOne(Users, { where: { uuid: userUuid } }),
+      this.manager.exists(WalletHolders, { where: { wallet: { uuid: walletUuid }, user: { uuid: userUuid } } })
     ]);
 
     if (!user) {
@@ -29,6 +31,9 @@ export class WalletRepository extends Repository<Wallets> implements IWalletRepo
     }
     if (!wallet) {
       throw new BadRequestException(X.WALLETS.NOT_FOUND);
+    }
+    if (existing) {
+      throw new BadRequestException(X.USERS.EXISTING);
     }
     await this.manager.save(WalletHolders, { userId: user.id, walletId: wallet.id });
     return wallet;
@@ -61,7 +66,9 @@ export class WalletRepository extends Repository<Wallets> implements IWalletRepo
     const filterName = query.keyword ? { name: ILike(`%${query.keyword}%`) } : {};
     const filterUser: FindOptionsWhere<Wallets> = query.user ? { holders: { user: { uuid: query.user } } } : {};
     const [wallets, total] = await this.findAndCount({
+      select: { holders: { id: true, isOwner: true, userId: true } },
       where: { ...filterName, ...filterUser },
+      relations: { holders: true },
       take,
       skip,
       order: { [sortBy]: orderBy }
@@ -69,7 +76,11 @@ export class WalletRepository extends Repository<Wallets> implements IWalletRepo
     return {
       page,
       size,
-      wallets,
+      wallets: map(wallets, (w) => {
+        const isOwner = every(w.holders, { isOwner: true });
+        delete w.holders;
+        return { ...w, isOwner };
+      }),
       total
     };
   }
