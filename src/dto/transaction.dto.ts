@@ -5,11 +5,11 @@ import { IsEnum, IsNumber, IsOptional, IsPositive, IsString, IsUUID } from 'clas
 import { PaginationDto } from './base.dto';
 
 export class CreatedTransactionDto {
-  @ApiProperty({ required: false })
+  @ApiProperty()
   @IsUUID('4', { message: V.UUID })
   userUuid: string;
 
-  @ApiProperty({ required: false })
+  @ApiProperty()
   @IsUUID('4', { message: V.UUID })
   walletUuid: string;
 
@@ -30,12 +30,12 @@ export class CreatedTransactionDto {
 
 export class ListTransactionDto extends PaginationDto {
   @IsOptional()
-  @ApiProperty({ required: false })
+  @ApiProperty({ required: false, name: 'userUuid', type: 'string' })
   @IsUUID('4', { message: V.UUID })
   userUuid?: string;
 
+  @ApiProperty({ required: false, name: 'walletUuid', type: 'string' })
   @IsOptional()
-  @ApiProperty({ required: false })
   @IsUUID('4', { message: V.UUID })
   walletUuid?: string;
 }

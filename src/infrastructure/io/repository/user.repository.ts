@@ -2,7 +2,7 @@ import { IUserRepository } from '@adaptors/repository';
 import { Injectable } from '@nestjs/common';
 import { IListUserRepoQuery, IListUserRepoResponse } from '@shares/user.interface';
 import { fromOrder, fromPaginate } from '@utilities/paginate.utility';
-import { DataSource, Repository } from 'typeorm';
+import { DataSource, FindManyOptions, ILike, Repository } from 'typeorm';
 import { Users } from '../entity';
 
 @Injectable()
@@ -17,8 +17,20 @@ export class UsersRepository extends Repository<Users> implements IUserRepositor
       defaultSort: 'createdAt',
       allowFieldSorts: ['createdAt', 'updatedAt', 'email', 'firstName', 'lastName']
     });
+
+    const findOptions: FindManyOptions<Users> = {
+      where: query.keyword
+        ? [
+            { firstName: ILike(`%${query.keyword}%`) },
+            { lastName: ILike(`%${query.keyword}%`) },
+            { email: ILike(`%${query.keyword}%`) }
+          ]
+        : {}
+    };
+
     const [users, total] = await this.findAndCount({
       select: ['id', 'uuid', 'email', 'firstName', 'lastName', 'createdAt', 'updatedAt'],
+      ...findOptions,
       take,
       skip,
       order: { [sortBy]: orderBy }

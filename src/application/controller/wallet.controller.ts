@@ -36,7 +36,6 @@ export class WalletController {
 
   @Post()
   @HttpCode(HttpStatusCode.Created)
-  // @ApiCreatedResponse({ status: HttpStatusCode.Created })
   async createWallet(@Body() createWallet: CreatedWalletDto) {
     const wallet = await this.walletService.createWallet(createWallet);
     return { wallets: { wallet } };
