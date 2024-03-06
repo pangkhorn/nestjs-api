@@ -1,5 +1,5 @@
 import { Users } from '@infrastructures/io/entity';
-import { IListUserRepoQuery, IListUserRepoResponse } from '@shares/user.interface';
+import { IListUserRepoQuery, IListUserRepoResponse } from '@shares/type/user.interface';
 import { Repository } from 'typeorm';
 
 export const USERS_REPOSITORY = 'USERS_REPOSITORY';

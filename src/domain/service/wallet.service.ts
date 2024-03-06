@@ -5,7 +5,7 @@ import {
   IListWalletServiceQuery,
   IListWalletServiceResponse,
   IUpdateWalletService
-} from '@shares/wallet.interface';
+} from '@shares/type/wallet.interface';
 
 export const WALLET_SERVICE = 'WALLET_SERVICE';
 export interface IWalletService {

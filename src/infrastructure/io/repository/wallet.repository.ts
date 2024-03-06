@@ -7,7 +7,7 @@ import {
   IListWalletRepoResponse,
   IListWalletServiceQuery,
   IUpdateWalletRepoCommand
-} from '@shares/wallet.interface';
+} from '@shares/type/wallet.interface';
 import { fromOrder, fromPaginate } from '@utilities/paginate.utility';
 import { every, map } from 'lodash';
 import { DataSource, FindOptionsWhere, ILike, Repository } from 'typeorm';

@@ -7,7 +7,7 @@ import {
   IListWalletServiceQuery,
   IListWalletServiceResponse,
   IUpdateWalletService
-} from '@shares/wallet.interface';
+} from '@shares/type/wallet.interface';
 import { IWalletService } from '../wallet.service';
 import { BaseService } from './base.service';
 

@@ -1,6 +1,6 @@
 import { IUserRepository, USERS_REPOSITORY } from '@adaptors/repository';
 import { Inject, Injectable } from '@nestjs/common';
-import { IListUserServiceQuery, IListUserServiceResponse } from '@shares/user.interface';
+import { IListUserServiceQuery, IListUserServiceResponse } from '@shares/type/user.interface';
 import { IUserService } from '../user.service';
 
 @Injectable()

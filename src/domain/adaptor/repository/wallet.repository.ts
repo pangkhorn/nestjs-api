@@ -4,7 +4,7 @@ import {
   ICreateWalletRepoCommand,
   IListWalletRepoQuery,
   IUpdateWalletRepoCommand
-} from '@shares/wallet.interface';
+} from '@shares/type/wallet.interface';
 import { Repository } from 'typeorm';
 
 export const WALLET_REPOSITORY = 'WALLET_REPOSITORY';

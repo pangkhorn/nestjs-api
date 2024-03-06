@@ -3,7 +3,7 @@ import {
   ICreateTransactionRepo,
   IListTransactionRepoQuery,
   IListTransactionRepoResponse
-} from '@shares/transaction.interface';
+} from '@shares/type/transaction.interface';
 import { Repository } from 'typeorm';
 
 export const TRANSACTION_REPOSITORY = 'TRANSACTION_REPOSITORY';

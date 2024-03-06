@@ -1,4 +1,4 @@
-import { IListUserServiceQuery, IListUserServiceResponse } from '@shares/user.interface';
+import { IListUserServiceQuery, IListUserServiceResponse } from '@shares/type/user.interface';
 
 export const USER_SERVICE = 'USER_SERVICE';
 

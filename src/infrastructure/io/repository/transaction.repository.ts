@@ -6,7 +6,7 @@ import {
   ICreateTransactionRepo,
   IListTransactionRepoQuery,
   IListTransactionRepoResponse
-} from '@shares/transaction.interface';
+} from '@shares/type/transaction.interface';
 import { fromOrder, fromPaginate } from '@utilities/paginate.utility';
 import { DataSource, FindOptionsWhereProperty, Repository } from 'typeorm';
 import { Transactions, Users, Wallets } from '../entity';

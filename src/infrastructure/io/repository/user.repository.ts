@@ -1,6 +1,6 @@
 import { IUserRepository } from '@adaptors/repository';
 import { Injectable } from '@nestjs/common';
-import { IListUserRepoQuery, IListUserRepoResponse } from '@shares/user.interface';
+import { IListUserRepoQuery, IListUserRepoResponse } from '@shares/type/user.interface';
 import { fromOrder, fromPaginate } from '@utilities/paginate.utility';
 import { DataSource, FindManyOptions, ILike, Repository } from 'typeorm';
 import { Users } from '../entity';

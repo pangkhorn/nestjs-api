@@ -5,7 +5,7 @@ import {
   ICreateTransactionService,
   IListTransactionServiceQuery,
   IListTransactionServiceResponse
-} from '@shares/transaction.interface';
+} from '@shares/type/transaction.interface';
 import { ITransactionService } from '../transaction.service';
 import { BaseService } from './base.service';
 

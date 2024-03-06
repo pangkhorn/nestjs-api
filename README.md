@@ -1,4 +1,4 @@
-### Nestjs API Project Structure
+### Nestjs API Service
 
 ```bash
 ## Prerequisite

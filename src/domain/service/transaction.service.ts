@@ -3,7 +3,7 @@ import {
   ICreateTransactionService,
   IListTransactionServiceQuery,
   IListTransactionServiceResponse
-} from '@shares/transaction.interface';
+} from '@shares/type/transaction.interface';
 
 export const TRANSACTION_SERVICE = 'TRANSACTION_SERVICE';
 export interface ITransactionService {

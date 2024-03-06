@@ -2,7 +2,8 @@ import { ParseUUIDV4Pipe } from '@commons/pipe.common';
 import { IWalletService, WALLET_SERVICE } from '@domains/service';
 import { AddWalletHolder, CreatedWalletDto, ListWalletDto, UpdateWalletDto } from '@dtos/wallet.dto';
 import { Body, Controller, Get, HttpCode, Inject, Param, Post, Put, Query } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { WalletListResponse } from '@shares/response/base.response';
 import { HttpStatusCode } from 'axios';
 
 @ApiTags('Wallets')
@@ -11,6 +12,7 @@ export class WalletController {
   constructor(@Inject(WALLET_SERVICE) private readonly walletService: IWalletService) {}
 
   @Get()
+  @ApiOkResponse({ type: WalletListResponse })
   async listWallets(@Query() query: ListWalletDto) {
     return { wallets: await this.walletService.listWallets(query) };
   }
