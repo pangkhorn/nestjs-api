@@ -1,5 +1,31 @@
 version: '3.9'
 services:
+  keycloak:
+    container_name: keycloak_container
+    build:
+      context: .
+      dockerfile: Dockerfile.keycloak
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_DB_VENDOR: postgres
+      KC_DATABASE: postgres
+      KC_STORAGE: jpa
+      KC_DB_URL: jdbc:postgresql://postgres/keycloak
+      KC_DB_USERNAME: ${DB_USERNAME}
+      KC_DB_PASSWORD: ${DB_PASSWORD}
+      KC_HTTP_ENABLED: true
+      KC_HOSTNAME_STRICT: false
+      KC_HOSTNAME_STRICT_HTTPS: false
+    command: start --optimized
+    ports:
+      - 8080:8080
+    networks:
+      - docker-network
+    volumes:
+      - keycloak-data:/opt/keycloak/data
+    depends_on:
+      - postgres
   redis:
     container_name: redis_container
     hostname: redis
@@ -26,9 +52,26 @@ services:
       - postgres-data:/var/lib/postgresql/data
     networks:
       - docker-network
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin4_container
+    restart: always
+    ports:
+      - 8888:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: sokhon.pg@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    networks:
+      - docker-network
+    depends_on:
+      - postgres
 volumes:
   redis-data:
   postgres-data:
+  keycloak-data: {}
+  pgadmin-data:
 networks:
   docker-network:
     driver: bridge
