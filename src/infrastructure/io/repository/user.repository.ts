@@ -1,5 +1,6 @@
 import { IUserRepository } from '@adaptors/repository';
 import { Injectable } from '@nestjs/common';
+import { IAuthUser } from '@shares/type/base.interface';
 import { IListUserRepoQuery, IListUserRepoResponse } from '@shares/type/user.interface';
 import { fromOrder, fromPaginate } from '@utilities/paginate.utility';
 import { DataSource, FindManyOptions, ILike, Repository } from 'typeorm';
@@ -29,12 +30,26 @@ export class UsersRepository extends Repository<Users> implements IUserRepositor
     };
 
     const [users, total] = await this.findAndCount({
-      select: ['id', 'uuid', 'email', 'firstName', 'lastName', 'createdAt', 'updatedAt'],
+      select: ['id', 'uuid', 'email', 'sub', 'firstName', 'lastName', 'createdAt', 'updatedAt'],
       ...findOptions,
       take,
       skip,
       order: { [sortBy]: orderBy }
     });
     return { total, page, size, users };
+  }
+
+  async syncAuthenticated(dto: IAuthUser): Promise<Users> {
+    let user = await this.findOne({ where: { sub: dto.sub } });
+    if (!user) {
+      user = await this.save({
+        sub: dto.sub,
+        firstName: dto.family_name,
+        lastName: dto.given_name,
+        username: dto.preferred_username,
+        email: dto.email
+      });
+    }
+    return user;
   }
 }

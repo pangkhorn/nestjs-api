@@ -6,7 +6,8 @@ export const NO_CHANGE = 'exceptions.no_change';
 export const NOT_TO_SUBMIT = 'exceptions.not_to_submit';
 
 export const WALLETS = {
-  NOT_FOUND: 'exceptions.wallets.not_found'
+  NOT_FOUND: 'exceptions.wallets.not_found',
+  INVALID_OWNER: 'exceptions.wallets.invalid_owner'
 };
 
 export const USERS = {

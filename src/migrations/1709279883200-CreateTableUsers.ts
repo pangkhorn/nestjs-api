@@ -10,6 +10,7 @@ export class CreateTableUsers1709279883200 implements MigrationInterface {
         columns: [
           { name: 'id', type: 'int', isPrimary: true, isGenerated: true },
           { name: 'uuid', type: 'uuid', isUnique: true, isGenerated: true, generationStrategy: 'uuid' },
+          { name: 'sub', type: 'uuid', isNullable: true },
           { name: 'username', type: 'varchar', isNullable: true },
           { name: 'email', type: 'varchar', isNullable: true },
           { name: 'first_name', type: 'varchar', isNullable: true },
@@ -22,7 +23,8 @@ export class CreateTableUsers1709279883200 implements MigrationInterface {
 
     await queryRunner.createIndices('users', [
       new TableIndex({ columnNames: ['username'], name: 'IDX_USER_USERNAME' }),
-      new TableIndex({ columnNames: ['email'], name: 'IDX_USER_EMAIL' })
+      new TableIndex({ columnNames: ['email'], name: 'IDX_USER_EMAIL' }),
+      new TableIndex({ columnNames: ['sub'], name: 'IDX_USER_SUB' })
     ]);
   }
 

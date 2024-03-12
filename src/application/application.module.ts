@@ -1,7 +1,9 @@
+import { keycloakConfig } from '@configs/keycloak.config';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { ThrottlerModule } from '@nestjs/throttler';
+import { KeycloakConnectModule } from 'nest-keycloak-connect';
 import { AcceptLanguageResolver, I18nModule, QueryResolver } from 'nestjs-i18n';
 import * as path from 'path';
 import { DomainModule } from '../domain/domain.module';
@@ -28,6 +30,14 @@ import { providers } from './provider.application';
         watch: true
       },
       resolvers: [{ use: QueryResolver, options: ['lang'] }, AcceptLanguageResolver]
+    }),
+    ConfigModule.forRoot({
+      load: [keycloakConfig('keycloak')]
+    }),
+    KeycloakConnectModule.registerAsync({
+      imports: [ConfigModule],
+      useFactory: (config: ConfigService) => config.get('keycloak'),
+      inject: [ConfigService]
     }),
     DomainModule
   ],

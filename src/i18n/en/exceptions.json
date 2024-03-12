@@ -6,7 +6,8 @@
   "not_to_submit": "There is nothing to submit.",
   "unauthenticated": "Unauthenticated",
   "wallets": {
-    "not_found": "The wallet not found."
+    "not_found": "The wallet not found.",
+    "invalid_owner": "The owner can do this action"
   },
   "users": {
     "not_found": "The user not found.",

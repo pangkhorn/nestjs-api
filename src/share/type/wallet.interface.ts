@@ -11,7 +11,7 @@ export interface ICreateWalletService {
 }
 
 export interface IListWalletServiceQuery extends IPagination {
-  user?: string;
+  userUuid: string;
 }
 
 export interface IUpdateWalletService {
@@ -37,6 +37,7 @@ export type IListWalletRepoResponse = IListWalletServiceResponse;
 export interface IAddWalletHolderService {
   walletUuid: string;
   userUuid: string;
+  ownerUuid: string;
 }
 
 export interface IAddWalletHolderRepo extends IAddWalletHolderService {}

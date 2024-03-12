@@ -2,6 +2,7 @@ import { Controller, Get } from '@nestjs/common';
 import { RedisOptions, Transport } from '@nestjs/microservices';
 import { ApiTags } from '@nestjs/swagger';
 import { HealthCheck, HealthCheckService, MicroserviceHealthIndicator, TypeOrmHealthIndicator } from '@nestjs/terminus';
+import { Public } from 'nest-keycloak-connect';
 
 @ApiTags('Health Check')
 @Controller({ path: 'health' })
@@ -14,6 +15,7 @@ export class HealthController {
 
   @Get()
   @HealthCheck()
+  @Public()
   check() {
     return this.health.check([
       () => this.db.pingCheck('database'),

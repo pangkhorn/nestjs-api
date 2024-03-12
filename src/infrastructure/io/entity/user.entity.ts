@@ -10,13 +10,16 @@ export class Users extends Timestamps {
   @Column({ name: 'uuid' })
   uuid: string;
 
+  @Column({ nullable: true })
+  sub?: string;
+
   @Column({ nullable: true, length: 255 })
   username: string;
 
   @Column({ nullable: true, length: 255 })
   email: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, select: false })
   password: string;
 
   @Column({ name: 'first_name', nullable: true, length: 255 })

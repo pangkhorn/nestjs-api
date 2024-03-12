@@ -19,11 +19,14 @@ export class WalletRepository extends Repository<Wallets> implements IWalletRepo
     super(Wallets, dataSource.createEntityManager());
   }
   async addWalletHolder(data: IAddWalletHolderRepo): Promise<Wallets> {
-    const { userUuid, walletUuid } = data;
-    const [wallet, user, existing] = await Promise.all([
+    const { userUuid, walletUuid, ownerUuid } = data;
+    const [wallet, user, existing, isOwner] = await Promise.all([
       this.findOne({ where: { uuid: walletUuid } }),
       this.manager.findOne(Users, { where: { uuid: userUuid } }),
-      this.manager.exists(WalletHolders, { where: { wallet: { uuid: walletUuid }, user: { uuid: userUuid } } })
+      this.manager.exists(WalletHolders, { where: { wallet: { uuid: walletUuid }, user: { uuid: userUuid } } }),
+      this.manager.exists(WalletHolders, {
+        where: { isOwner: true, wallet: { uuid: walletUuid }, user: { uuid: ownerUuid } }
+      })
     ]);
 
     if (!user) {
@@ -35,6 +38,10 @@ export class WalletRepository extends Repository<Wallets> implements IWalletRepo
     if (existing) {
       throw new BadRequestException(X.USERS.EXISTING);
     }
+    if (!isOwner) {
+      throw new BadRequestException(X.WALLETS.INVALID_OWNER);
+    }
+
     await this.manager.save(WalletHolders, { userId: user.id, walletId: wallet.id });
     return wallet;
   }
@@ -64,7 +71,7 @@ export class WalletRepository extends Repository<Wallets> implements IWalletRepo
     const { skip, take, page, size } = fromPaginate({ page: query.page, size: query.size });
 
     const filterName = query.keyword ? { name: ILike(`%${query.keyword}%`) } : {};
-    const filterUser: FindOptionsWhere<Wallets> = query.user ? { holders: { user: { uuid: query.user } } } : {};
+    const filterUser: FindOptionsWhere<Wallets> = query.userUuid ? { holders: { user: { uuid: query.userUuid } } } : {};
     const [wallets, total] = await this.findAndCount({
       select: { holders: { id: true, isOwner: true, userId: true } },
       where: { ...filterName, ...filterUser },

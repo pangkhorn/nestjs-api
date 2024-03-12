@@ -7,10 +7,6 @@ import { PaginationDto } from './base.dto';
 export class CreatedTransactionDto {
   @ApiProperty()
   @IsUUID('4', { message: V.UUID })
-  userUuid: string;
-
-  @ApiProperty()
-  @IsUUID('4', { message: V.UUID })
   walletUuid: string;
 
   @ApiProperty({ required: true })
@@ -29,11 +25,6 @@ export class CreatedTransactionDto {
 }
 
 export class ListTransactionDto extends PaginationDto {
-  @IsOptional()
-  @ApiProperty({ required: false, name: 'userUuid', type: 'string' })
-  @IsUUID('4', { message: V.UUID })
-  userUuid?: string;
-
   @ApiProperty({ required: false, name: 'walletUuid', type: 'string' })
   @IsOptional()
   @IsUUID('4', { message: V.UUID })

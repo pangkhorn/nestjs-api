@@ -7,10 +7,6 @@ import { IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, IsUUID, Matches, Ma
 import { PaginationDto } from './base.dto';
 
 export class CreatedWalletDto {
-  @ApiProperty()
-  @IsUUID('4', { message: V.UUID })
-  userUuid: string;
-
   @ApiProperty({ required: true })
   @IsNotEmpty({ message: V.NOT_EMPTY })
   @IsString({ message: V.STRING })

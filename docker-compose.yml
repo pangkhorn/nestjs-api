@@ -40,7 +40,7 @@ services:
       - docker-network
   postgres:
     image: postgres:14.1-alpine
-    container_name: postgres
+    container_name: postgres_container
     restart: always
     environment:
       - POSTGRES_DB=${DB_DATABASE}
